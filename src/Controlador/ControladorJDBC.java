@@ -15,7 +15,6 @@ public class ControladorJDBC implements DAO {
     public final String SELECT_BY_PAY = "SELECT * FROM informe WHERE idPago = ?";
     public final String SELECT_BY_PRODUCT = "SELECT * FROM informe WHERE idProducto = ?";
     public final String INSERT_INFORME = "INSERT INTO informe (idInforme, idCliente, idOrden, idPago, idProducto) VALUES (?, ?, ?, ?, ?)";
-    public final String UPDATE_INFORME_BY_ID = "UPDATE informe SET idCliente = ?, idOrden = ?, idPago = ?, idProducto = ? WHERE idInforme = ?";
     public final String UPDATE_INFORME_PAGO_BY_ID = "UPDATE informe SET idPago = ? WHERE idInforme = ?";
     public final String UPDATE_INFORME_CLIENTE_BY_ID = "UPDATE informe SET idCliente = ? WHERE idInforme = ?";
     public final String UPDATE_INFORME_ORDEN_BY_ID = "UPDATE informe SET idOrden = ? WHERE idInforme = ?";
@@ -35,7 +34,7 @@ public class ControladorJDBC implements DAO {
     }
     @Override
     public ArrayList<Informe> SelectAll() {
-        ArrayList<Informe> lista = new ArrayList<Informe>();
+        ArrayList<Informe> lista = new ArrayList<>();
         try {
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery(SELECT_ALL);
@@ -97,23 +96,6 @@ public class ControladorJDBC implements DAO {
             ps.setInt(3, idOrden);
             ps.setInt(4, idPago);
             ps.setInt(5, idProducto);
-            ps.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    @Override
-    public boolean UpdateInformeById(int idInforme, int idCliente, int idOrden, int idPago, int idProducto) {
-        try {
-            PreparedStatement ps = conexion.prepareStatement(UPDATE_INFORME_BY_ID);
-            ps.setInt(1, idCliente);
-            ps.setInt(2, idOrden);
-            ps.setInt(3, idPago);
-            ps.setInt(4, idProducto);
-            ps.setInt(5, idInforme);
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
