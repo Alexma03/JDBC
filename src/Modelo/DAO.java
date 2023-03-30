@@ -3,11 +3,13 @@ package Modelo;
 import java.util.ArrayList;
 
 public interface DAO {
-    ArrayList<Informe> SelectAll();Informe SelectByPay(int idPago);
-    Informe SelectByClient(int idCliente);
-    Informe SelectByOrder(int idOrden);
-    Informe SelectByProduct(int idProducto);
-    Informe SelectByInform(int idInforme);
+    ArrayList<Informe> SelectAll();
+
+    ArrayList<Informe> SelectByPay(int idPago);
+    ArrayList<Informe> SelectByClient(int idCliente);
+    ArrayList<Informe> SelectByOrder(int idOrden);
+    ArrayList<Informe> SelectByProduct(int idProducto);
+    ArrayList<Informe> SelectByInform(int idInforme);
     boolean InsertInforme(int idInforme, int idCliente, int idOrden, int idPago, int idProducto);
     boolean UpdateInformePagoById(int idCliente, int idInforme);
     boolean UpdateInformeClienteById(int idCliente, int idInforme);

@@ -50,41 +50,45 @@ public class ControladorJDBC implements DAO {
     }
 
     @Override
-    public Informe SelectByPay(int idPago) {
+    public ArrayList<Informe> SelectByPay(int idPago) {
         return getInforme(idPago, SELECT_BY_PAY);
 
     }
     @Override
-    public Informe SelectByClient(int idCliente) {
+    public ArrayList<Informe> SelectByClient(int idCliente) {
         return getInforme(idCliente, SELECT_BY_CLIENT);
     }
 
     @Override
-    public Informe SelectByOrder(int idOrden) {
+    public ArrayList<Informe> SelectByOrder(int idOrden) {
         return getInforme(idOrden, SELECT_BY_ORDER);
     }
 
     @Override
-    public Informe SelectByProduct(int idProducto) {
+    public ArrayList<Informe> SelectByProduct(int idProducto) {
         return getInforme(idProducto, SELECT_BY_PRODUCT);
     }
 
     @Override
-    public Informe SelectByInform(int idInforme) {
+    public ArrayList<Informe> SelectByInform(int idInforme) {
         return getInforme(idInforme, SELECT_BY_INFORM);
     }
 
-    public Informe getInforme(int id, String selectBy) {
+    public ArrayList<Informe> getInforme(int id, String selectBy) {
+        ArrayList<Informe> lista = new ArrayList<>();
         try {
             PreparedStatement ps = conexion.prepareStatement(selectBy);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            rs.next();
-            return new Informe(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+            while (rs.next()) {
+                Informe b = new Informe(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+                lista.add(b);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
+        return lista;
     }
 
     @Override
