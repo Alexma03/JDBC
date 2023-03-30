@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public interface DAO {
     ArrayList<Informe> SelectAll();
-
     ArrayList<Informe> SelectByPay(int idPago);
     ArrayList<Informe> SelectByClient(int idCliente);
     ArrayList<Informe> SelectByOrder(int idOrden);
